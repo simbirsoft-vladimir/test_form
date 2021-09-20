@@ -6,13 +6,29 @@
           <template v-if="true">
             <base-select
               :options="cities"
+              v-bind="optionsParams"
               class="realty-search-form__select realty-search-form__select_first"
+              @select="currentCity = Number($event)"
             />
-            <base-select class="realty-search-form__select"/>
-            <base-select class="realty-search-form__select"/>
+            <base-select
+              :options="actions"
+              v-bind="optionsParams"
+              class="realty-search-form__select"
+              @select="currentAction = Number($event)"
+            />
+            <base-select
+              :options="estate"
+              v-bind="optionsParams"
+              class="realty-search-form__select"
+              @select="currentEstate = Number($event)"
+            />
           </template>
           <div v-else></div>
-          <base-button>Найти</base-button>
+          <base-button
+            class="realty-search-form__search-button"
+          >
+            Найти
+          </base-button>
         </base-form-group>
       </div>
     </div>
@@ -30,6 +46,8 @@ import BaseForm from './ui/BaseForm.vue'
 import BaseFormGroup from './ui/BaseFormGroup.vue'
 import BaseSelect from './ui/BaseSelect.vue'
 import {cities} from '../mocks/cities'
+import {actions} from '../mocks/actions'
+import {estate} from '../mocks/estate'
 
 export default Vue.extend({
   name: 'RealtySearchForm',
@@ -37,14 +55,25 @@ export default Vue.extend({
 
   data() {
     return {
-      cities: cities ?? [],
-      chosenCity: null,
+      cities,
+      actions,
+      estate,
+      currentCity: cities[0].id,
+      currentAction: actions[0].id,
+      currentEstate: estate[0].id,
+      optionsParams: {
+        optionKey: 'id',
+        optionValue: 'id',
+        optionText: 'title',
+      },
     }
-  }
+  },
 })
 </script>
 
 <style lang="scss">
+  @import'@/styles/variables.scss';
+
   .realty-search-form {
     max-width: 940px;
 
@@ -59,6 +88,7 @@ export default Vue.extend({
 
     &__footer {
       height: 45px;
+      padding: 0 20px;
       background-color: #E6F2FE;
     }
 
@@ -68,6 +98,12 @@ export default Vue.extend({
       &_first {
         margin-left: 0;
       }
+    }
+
+    &__search-button {
+      background-color: $success;
+      color: white;
+      font-size: 20px;
     }
   }
 </style>

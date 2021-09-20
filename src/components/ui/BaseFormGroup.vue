@@ -14,8 +14,10 @@ export default Vue.extend({
 
 <style lang="scss">
   .base-form-group {
+    display: flex;
+
     input,
-    select,
+    label,
     button {
       &:first-child {
         border-top-left-radius: 4px;

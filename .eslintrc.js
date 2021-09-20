@@ -1,11 +1,14 @@
 module.exports = {
+  parser: 'vue-eslint-parser',
+  plugins: ['@typescript-eslint'],
   rules: {
     semi: 'off',
   },
   extends: [
-    "plugin:vue/base"
+    'plugin:vue/base'
   ],
   parserOptions: {
-    "ecmaVersion": 2020
+    parser: '@typescript-eslint/parser',
+    ecmaVersion: 2020
   },
 }

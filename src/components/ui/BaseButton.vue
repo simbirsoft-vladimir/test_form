@@ -1,5 +1,8 @@
 <template>
-  <button class="base-button">
+  <button
+    type="button"
+    class="base-button"
+  >
     <slot />
   </button>
 </template>
