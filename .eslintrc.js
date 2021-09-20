@@ -5,4 +5,7 @@ module.exports = {
   extends: [
     "plugin:vue/base"
   ],
+  parserOptions: {
+    "ecmaVersion": 2020
+  },
 }
