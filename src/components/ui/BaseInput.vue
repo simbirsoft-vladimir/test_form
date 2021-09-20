@@ -1,5 +1,9 @@
 <template>
-  <input class="base-input">
+  <input
+    v-bind="$attrs"
+    @input="$emit('input', $event.target.value)"
+    class="base-input"
+  >
 </template>
 
 <script lang="ts">
@@ -9,3 +13,12 @@ export default Vue.extend({
   name: 'BaseInput',
 })
 </script>
+
+<style lang="scss">
+  .base-input {
+    padding: 0 20px;
+    border: none;
+    outline: none;
+    font-size: 18px;
+  }
+</style>

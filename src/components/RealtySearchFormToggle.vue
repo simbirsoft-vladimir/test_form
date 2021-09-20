@@ -1,12 +1,24 @@
 <template>
   <div class="realty-search-form-toggle">
-    <span class="realty-search-form-toggle__label">Основной поиск</span>
+    <span
+      :class="checked ? '' : 'realty-search-form-toggle__label_active'"
+      class="realty-search-form-toggle__label"
+      @click="$emit('toggle')"
+    >
+      Основной поиск
+    </span>
     <base-toggle
       :checked="checked"
       class="realty-search-form-toggle__toggler"
       @toggle="$emit('toggle')"
     />
-    <span class="realty-search-form-toggle__label">Искать по названию</span>
+    <span
+      :class="checked ? 'realty-search-form-toggle__label_active' : ''"
+      class="realty-search-form-toggle__label"
+      @click="$emit('toggle')"
+    >
+      Искать по названию
+    </span>
   </div>
 </template>
 
@@ -31,11 +43,16 @@ export default Vue.extend({
     display: flex;
     align-items: center;
 
-    &__realty-search-form-toggle__label {
+    &__label {
+      border-bottom: 1px dotted;
+      line-height: 1;
       color: #506981;
+      cursor: pointer;
 
       &_active {
         color: #ADB9C4;
+        border: none;
+        pointer-events: none;
       }
     }
 

@@ -3,7 +3,13 @@
     <div class="realty-search-form__main-block">
       <div class="realty-search-form__search-controls">
         <base-form-group>
-          <template v-if="true">
+          <base-input
+            v-if="isSearchByTitle"
+            v-model="estateTitle"
+            placeholder="Введите название объекта (бизнес-центра, торгового центра, новостройки, логопарка)"
+            class="realty-search-form__search-by-title"
+          />
+          <template v-else>
             <base-select
               :options="cities"
               v-bind="optionsParams"
@@ -23,7 +29,6 @@
               @select="currentEstate = Number($event)"
             />
           </template>
-          <div v-else></div>
           <base-button
             class="realty-search-form__search-button"
           >
@@ -51,10 +56,18 @@ import BaseSelect from './ui/BaseSelect.vue'
 import {cities} from '../mocks/cities'
 import {actions} from '../mocks/actions'
 import {estate} from '../mocks/estate'
+import BaseInput from './ui/BaseInput.vue'
 
 export default Vue.extend({
   name: 'RealtySearchForm',
-  components: { BaseForm, BaseSelect, BaseButton, BaseFormGroup, RealtySearchFormToggle },
+  components: {
+    BaseForm,
+    BaseSelect,
+    BaseButton,
+    BaseFormGroup,
+    RealtySearchFormToggle,
+    BaseInput
+  },
 
   data() {
     return {
@@ -70,6 +83,7 @@ export default Vue.extend({
         optionText: 'title',
       },
       isSearchByTitle: false,
+      estateTitle: '',
     }
   },
 })
@@ -102,6 +116,12 @@ export default Vue.extend({
       &_first {
         margin-left: 0;
       }
+    }
+
+    &__search-by-title {
+      flex: 1;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
     }
 
     &__search-button {
