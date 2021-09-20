@@ -1,9 +1,18 @@
 <template>
-  <div class="base-toggle">
+  <div
+    class="base-toggle"
+    @click="$emit('toggle')"
+  >
     <div class="base-toggle__inner">
-      <input class="base-toggle__native" type="checkbox" />
+      <input class="base-toggle__native"
+        :checked="checked"
+        type="checkbox"
+      />
       <div class="base-toggle__track"></div>
-      <div class="base-toggle__thumb"></div>
+      <div
+        :class="checked ? 'base-toggle__thumb_truthy' : ''"
+        class="base-toggle__thumb"
+      ></div>
     </div>
   </div>
 </template>
@@ -13,10 +22,18 @@ import Vue from 'vue'
 
 export default Vue.extend({
   name: 'BaseToggle',
+  props: {
+    checked: {
+      type: Boolean,
+      default: false,
+    },
+  },
 })
 </script>
 
 <style lang="scss">
+  @import'@/styles/variables.scss';
+
   .base-toggle {
     vertical-align: middle;
     display: inline-flex;
@@ -31,7 +48,7 @@ export default Vue.extend({
       font-size: 40px;
       height: 1em;
       min-width: 1.4em;
-      padding: .325em .3em;
+      padding: .25em .3em;
       width: 1.4em;
     }
 
@@ -45,10 +62,10 @@ export default Vue.extend({
     }
 
     &__track {
-      opacity: .5;
-      background: currentColor;
-      border-radius: .175em;
-      height: .35em;
+      background: $success;
+      height: 22px;
+      border-radius: 11px;
+      width: 40px;
     }
 
     &__thumb {
@@ -64,6 +81,22 @@ export default Vue.extend({
       user-select: none;
       width: .5em;
       z-index: 0;
+
+      &_truthy {
+        left: .7em;
+      }
+
+      &::after {
+        background: #fff;
+        border-radius: 50%;
+        bottom: 0;
+        box-shadow: 0 3px 1px -2px #0003, 0 2px 2px 0 #00000024, 0 1px 5px 0 #0000001f;
+        content: "";
+        left: 3px;
+        position: absolute;
+        right: -3px;
+        top: 1.5px;
+      }
     }
   }
 </style>

@@ -33,7 +33,10 @@
       </div>
     </div>
     <div class="realty-search-form__footer">
-      <realty-search-form-toggle />
+      <realty-search-form-toggle
+        :checked="isSearchByTitle"
+        @toggle="isSearchByTitle = !isSearchByTitle"
+      />
     </div>
   </base-form>
 </template>
@@ -66,6 +69,7 @@ export default Vue.extend({
         optionValue: 'id',
         optionText: 'title',
       },
+      isSearchByTitle: false,
     }
   },
 })
