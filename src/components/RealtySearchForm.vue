@@ -31,6 +31,7 @@
           </template>
           <base-button
             class="realty-search-form__search-button"
+            @click="showCurrentParams"
           >
             Найти
           </base-button>
@@ -135,6 +136,24 @@ export default Vue.extend({
         : this.estateArea
     },
   },
+  methods: {
+    showCurrentParams() {
+      const params = {
+        city: this.cities.find(city => city.id === this.currentCity)?.title,
+        action: this.actions.find(action => action.id === this.currentAction)?.title,
+        estate: this.estate.find(premises => premises.id === this.currentEstate)?.title,
+        estate_title: this.estateTitle || 'Название не выбрано',
+        price_from: this.estatePrice.from ?? 0,
+        price_to: this.estatePrice.to ?? 0,
+        measure_type: this.estatePrice.selectValue,
+        area_from: this.estateArea.from ?? 0,
+        area_to: this.estateArea.to ?? 0,
+      }
+      const paramsArray = Object.entries(params).map(paramsPair => `${paramsPair[0]}: ${paramsPair[1]}`)
+      const paramsString = ['Данные формы: \n', ...paramsArray].join('\n')
+      alert(paramsString)
+    }
+  }
 })
 </script>
 
