@@ -6,7 +6,8 @@
       @click="$emit('add-estate-params', 'price')"
     >
       <div class="realty-search-form-params-toggler__icon realty-search-form-params-toggler__icon-price">
-        <img src="../assets/images/times-circle-regular.svg" alt="">
+        <img v-if="estateParameterType === 'price'" src="../assets/images/times-circle-regular.svg" alt="">
+        <img v-else src="../assets/images/plus-circle.svg" alt="">
       </div>
       <span class="realty-search-form-params-toggler__icon-text">Цена</span>
     </div>
@@ -16,7 +17,8 @@
       @click="$emit('add-estate-params', 'area')"
     >
       <div class="realty-search-form-params-toggler__icon">
-        <img src="../assets/images/plus-circle.svg" alt="">
+        <img v-if="estateParameterType === 'area'" src="../assets/images/times-circle-regular.svg" alt="">
+        <img v-else src="../assets/images/plus-circle.svg" alt="">
       </div>
       <span class="realty-search-form-params-toggler__icon-text">Метраж</span>
     </div>

@@ -14,19 +14,19 @@
               :options="cities"
               v-bind="optionsParams"
               class="realty-search-form__select realty-search-form__select_first"
-              @select="currentCity = Number($event)"
+              @select="currentCityId = Number($event)"
             />
             <base-select
               :options="actions"
               v-bind="optionsParams"
               class="realty-search-form__select"
-              @select="currentAction = Number($event)"
+              @select="currentActionId = Number($event)"
             />
             <base-select
               :options="estate"
               v-bind="optionsParams"
               class="realty-search-form__select"
-              @select="currentEstate = Number($event)"
+              @select="currentEstateId = Number($event)"
             />
           </template>
           <base-button
@@ -74,10 +74,10 @@ import RealtySearchFormParamsToggler from './RealtySearchFormParamsToggler.vue'
 import RealtySearchFormPriceEditor from './RealtySearchFormPriceEditor.vue'
 import RealtySearchFormAreaEditor from './RealtySearchFormAreaEditor.vue'
 import {capitalize} from '@/utils/formatText'
-import {cities} from '../mocks/cities'
-import {actions} from '../mocks/actions'
-import {estate} from '../mocks/estate'
-import {measuringMethods} from '../mocks/measuringMethods'
+import {cities} from '@/mocks/cities'
+import {actions} from '@/mocks/actions'
+import {estate} from '@/mocks/estate'
+import {measuringMethods} from '@/mocks/measuringMethods'
 
 interface Range {
   from: null | number
@@ -103,9 +103,9 @@ export default Vue.extend({
       cities,
       actions,
       estate,
-      currentCity: cities[0].id,
-      currentAction: actions[0].id,
-      currentEstate: estate[0].id,
+      currentCityId: 0,
+      currentActionId: 0,
+      currentEstateId: 0,
       optionsParams: {
         optionKey: 'id',
         optionValue: 'id',
@@ -123,6 +123,11 @@ export default Vue.extend({
       estateArea: {from: null, to: null},
     }
   },
+  mounted() {
+    this.currentCityId = cities[0].id
+    this.currentActionId = actions[0].id
+    this.currentEstateId = estate[0].id
+  },
   computed: {
     estateParameterComponent(): string | null {
       if (!this.estateParameterType) return null
@@ -139,9 +144,9 @@ export default Vue.extend({
   methods: {
     showCurrentParams() {
       const params = {
-        city: this.cities.find(city => city.id === this.currentCity)?.title,
-        action: this.actions.find(action => action.id === this.currentAction)?.title,
-        estate: this.estate.find(premises => premises.id === this.currentEstate)?.title,
+        city: this.cities.find(city => city.id === this.currentCityId)?.title,
+        action: this.actions.find(action => action.id === this.currentActionId)?.title,
+        estate: this.estate.find(premises => premises.id === this.currentEstateId)?.title,
         estate_title: this.estateTitle || 'Название не выбрано',
         price_from: this.estatePrice.from ?? 0,
         price_to: this.estatePrice.to ?? 0,
@@ -164,8 +169,8 @@ export default Vue.extend({
     max-width: 940px;
 
     &__main-block {
-      padding: 36px 20px;
-      background-color: #8cbbe6;
+      padding: 36px 20px 0;
+      background: linear-gradient(to right, #83b3e5, #a8d5e9);
     }
 
     &__search-controls {
@@ -228,6 +233,10 @@ export default Vue.extend({
         border-radius: 4px;
         margin-top: 8px;
       }
+    }
+
+    &__params-block {
+      padding-bottom: 36px;
     }
   }
 </style>

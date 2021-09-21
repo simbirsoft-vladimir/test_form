@@ -46,7 +46,9 @@ export default Vue.extend({
     background-color: #fff;
 
     &::after {
-      content: '\23F7';
+      content: url('~@/assets/images/caret-down-solid.svg');
+      width: 8px;
+      height: 8px;
       position: absolute;
       top: calc(50% - 13px);
       right: 20px;
