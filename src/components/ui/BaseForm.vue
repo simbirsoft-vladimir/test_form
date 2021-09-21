@@ -16,6 +16,5 @@ export default Vue.extend({
   .base-form {
     width: 100%;
     border-radius: 4px;
-    overflow: auto;
   }
 </style>

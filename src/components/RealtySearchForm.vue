@@ -36,11 +36,26 @@
           </base-button>
         </base-form-group>
       </div>
+      <div
+        v-if="estateParameterType && !isSearchByTitle"
+        class="realty-search-form__params-block"
+      >
+        <component
+          :is="estateParameterComponent"
+          v-bind.sync="currentParameters"
+          @add-estate-params="estateParameterType = $event"
+        />
+      </div>
     </div>
     <div class="realty-search-form__footer">
       <realty-search-form-toggle
         :checked="isSearchByTitle"
         @toggle="isSearchByTitle = !isSearchByTitle"
+      />
+      <realty-search-form-params-toggler
+        v-if="!isSearchByTitle"
+        :estateParameterType="estateParameterType"
+        @add-estate-params="estateParameterType = $event"
       />
     </div>
   </base-form>
@@ -48,15 +63,25 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import RealtySearchFormToggle from './RealtySearchFormToggle.vue'
 import BaseButton from './ui/BaseButton.vue'
 import BaseForm from './ui/BaseForm.vue'
 import BaseFormGroup from './ui/BaseFormGroup.vue'
 import BaseSelect from './ui/BaseSelect.vue'
+import BaseInput from './ui/BaseInput.vue'
+import RealtySearchFormToggle from './RealtySearchFormToggle.vue'
+import RealtySearchFormParamsToggler from './RealtySearchFormParamsToggler.vue'
+import RealtySearchFormPriceEditor from './RealtySearchFormPriceEditor.vue'
+import RealtySearchFormAreaEditor from './RealtySearchFormAreaEditor.vue'
+import {capitalize} from '@/utils/formatText'
 import {cities} from '../mocks/cities'
 import {actions} from '../mocks/actions'
 import {estate} from '../mocks/estate'
-import BaseInput from './ui/BaseInput.vue'
+import {measuringMethods} from '../mocks/measuringMethods'
+
+interface Range {
+  from: null | number
+  to: null | number
+}
 
 export default Vue.extend({
   name: 'RealtySearchForm',
@@ -65,8 +90,11 @@ export default Vue.extend({
     BaseSelect,
     BaseButton,
     BaseFormGroup,
+    BaseInput,
     RealtySearchFormToggle,
-    BaseInput
+    RealtySearchFormParamsToggler,
+    RealtySearchFormPriceEditor,
+    RealtySearchFormAreaEditor,
   },
 
   data() {
@@ -84,7 +112,28 @@ export default Vue.extend({
       },
       isSearchByTitle: false,
       estateTitle: '',
+      estateParameterType: '',
+      estatePrice: {
+        from: null,
+        to: null,
+        options: measuringMethods,
+        selectValue: measuringMethods[0]?.value,
+      },
+      estateArea: {from: null, to: null},
     }
+  },
+  computed: {
+    estateParameterComponent(): string | null {
+      if (!this.estateParameterType) return null
+
+      const currentParameter = capitalize(this.estateParameterType)
+      return `RealtySearchForm${currentParameter}Editor`
+    },
+    currentParameters(): Range {
+      return this.estateParameterType === 'price'
+        ? this.estatePrice
+        : this.estateArea
+    },
   },
 })
 </script>
@@ -96,7 +145,7 @@ export default Vue.extend({
     max-width: 940px;
 
     &__main-block {
-      padding: 36px 20px 0;
+      padding: 36px 20px;
       background-color: #8cbbe6;
     }
 
@@ -105,6 +154,8 @@ export default Vue.extend({
     }
 
     &__footer {
+      display: flex;
+      justify-content: space-between;
       height: 45px;
       padding: 0 20px;
       background-color: #E6F2FE;

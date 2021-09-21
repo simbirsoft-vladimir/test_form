@@ -18,7 +18,8 @@ export default Vue.extend({
 
     input,
     label,
-    button {
+    button,
+    div {
       &:first-child {
         border-top-left-radius: 4px;
         border-bottom-left-radius: 4px;
