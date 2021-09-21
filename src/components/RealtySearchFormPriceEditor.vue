@@ -89,6 +89,7 @@ export default Vue.extend({
     &__button {
       width: 100%;
       max-width: 330px;
+      font-size: 18px;
       color: #506981;
     }
   }

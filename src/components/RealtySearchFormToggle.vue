@@ -42,6 +42,7 @@ export default Vue.extend({
   .realty-search-form-toggle {
     display: flex;
     align-items: center;
+    font-size: 16px;
 
     &__label {
       border-bottom: 1px dotted;
