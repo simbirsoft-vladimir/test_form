@@ -6,7 +6,7 @@
       @click="$emit('add-estate-params', 'price')"
     >
       <div class="realty-search-form-params-toggler__icon realty-search-form-params-toggler__icon-price">
-        <span class="realty-search-form-params-toggler__icon-symbol">&#735;</span>
+        <img src="../assets/images/times-circle-regular.svg" alt="">
       </div>
       <span class="realty-search-form-params-toggler__icon-text">Цена</span>
     </div>
@@ -16,7 +16,7 @@
       @click="$emit('add-estate-params', 'area')"
     >
       <div class="realty-search-form-params-toggler__icon">
-        <span class="realty-search-form-params-toggler__icon-symbol">&#5161;</span>
+        <img src="../assets/images/plus-circle.svg" alt="">
       </div>
       <span class="realty-search-form-params-toggler__icon-text">Метраж</span>
     </div>
@@ -47,8 +47,6 @@ export default Vue.extend({
 
     &__icon {
       margin-right: 12px;
-      border: 2px solid #506981;
-      border-radius: 50%;
       text-align: center;
       height: 18px;
       line-height: 18px;
