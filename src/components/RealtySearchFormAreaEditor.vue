@@ -8,7 +8,7 @@
     >
       Добавить цену
     </base-button>
-    <base-form-group>
+    <base-form-group class="realty-search-form-area-editor__input-group">
       <base-input
         :value="from"
         placeholder="От"
@@ -51,20 +51,34 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
+  @import'@/styles/variables.scss';
+
   .realty-search-form-area-editor {
     display: flex;
     justify-content: space-between;
 
     &__button {
+      margin-right: 20px;
       width: 100%;
       height: 44px;
       max-width: 550px;
       font-size: 18px;
       color: #506981;
+      white-space: nowrap;
+
+      
+      @media (max-width: $screen-sm) {
+        display: none;
+      }
     }
 
     &__input {
       max-width: 138px;
+      height: 44px;
+
+      @media (max-width: $screen-sm) {
+        max-width: 105px;
+      }
 
       &_first {
         margin-right: 1px;

@@ -38,8 +38,16 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
+  @import'@/styles/variables.scss';
+
   .realty-search-form-params-toggler {
     display: flex;
+
+    @media (max-width: $screen-sm) {
+      width: 100%;
+      margin-bottom: 20px;
+      justify-content: space-between;
+    }
 
     &__price-block {
       margin-right: 20px;

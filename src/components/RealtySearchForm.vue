@@ -2,7 +2,7 @@
   <base-form class="realty-search-form">
     <div class="realty-search-form__main-block">
       <div class="realty-search-form__search-controls">
-        <base-form-group>
+        <base-form-group class="realty-search-form__select-group">
           <base-input
             v-if="isSearchByTitle"
             v-model="estateTitle"
@@ -175,13 +175,31 @@ export default Vue.extend({
     &__footer {
       display: flex;
       justify-content: space-between;
+      flex-wrap: wrap;
       height: 45px;
       padding: 0 20px;
       background-color: #E6F2FE;
+
+      @media (max-width: $screen-sm) {
+        height: auto;
+      }
+    }
+
+    &__select-group {
+      @media (max-width: $screen-sm) {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
     }
 
     &__select {
       margin-left: 1px;
+
+      @media (max-width: $screen-sm) {
+        width: 100%;
+        border-radius: 4px;
+        margin: 0 0 8px;
+      }
 
       &_first {
         margin-left: 0;
@@ -190,14 +208,26 @@ export default Vue.extend({
 
     &__search-by-title {
       flex: 1;
+      height: 44px;
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
+
+      @media (max-width: $screen-sm) {
+        margin-bottom: 8px;
+        border-radius: 4px;
+      }
     }
 
     &__search-button {
       background-color: $success;
       color: white;
       font-size: 20px;
+
+      @media (max-width: $screen-sm) {
+        width: 100%;
+        border-radius: 4px;
+        margin-top: 8px;
+      }
     }
   }
 </style>

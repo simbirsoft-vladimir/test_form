@@ -16,9 +16,8 @@ export default Vue.extend({
   .main-layout {
     height: 100vh;
     margin: 0;
-    padding: 0;
+    padding: 60px 8px;
     display: flex;
     justify-content: center;
-    align-items: center;
   }
 </style>

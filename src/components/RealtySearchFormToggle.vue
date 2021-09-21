@@ -39,10 +39,19 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
+  @import'@/styles/variables.scss';
+
   .realty-search-form-toggle {
+    margin: 0;
     display: flex;
     align-items: center;
     font-size: 16px;
+
+    @media (max-width: $screen-sm) {
+      width: 100%;
+      margin: 20px 0;
+      justify-content: space-between;
+    }
 
     &__label {
       border-bottom: 1px dotted;
@@ -59,6 +68,10 @@ export default Vue.extend({
 
     &__toggler {
       margin-right: 4px;
+
+      @media (max-width: $screen-sm) {
+        display: none;
+      }
     }
   }
 </style>

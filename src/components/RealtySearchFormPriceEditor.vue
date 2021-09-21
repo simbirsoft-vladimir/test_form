@@ -1,6 +1,6 @@
 <template>
   <div class="realty-search-form-price-editor">
-    <base-form-group>
+    <base-form-group class="realty-search-form-price-editor__controls-group">
       <base-input
         :value="from"
         placeholder="От"
@@ -71,19 +71,39 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
+  @import'@/styles/variables.scss';
+
   .realty-search-form-price-editor {
     display: flex;
     justify-content: space-between;
 
+    &__controls-group {
+      flex-wrap: wrap;
+    }
+
     &__input {
       max-width: 183px;
+      width: 100%;
+      height: 44px;
       margin-right: 1px;
       background-color: #E6F2FE;
+
+      @media (max-width: $screen-sm) {
+        max-width: unset;
+        border-radius: 4px;
+        margin-bottom: 8px;
+      }
     }
 
     &__select {
       max-width: 183px;
       background-color: #E6F2FE;
+
+      @media (max-width: $screen-sm) {
+        max-width: unset;
+        width: 100%;
+        border-radius: 4px;
+      }
     }
 
     &__button {
@@ -91,6 +111,10 @@ export default Vue.extend({
       max-width: 330px;
       font-size: 18px;
       color: #506981;
+
+      @media (max-width: $screen-sm) {
+        display: none;
+      }
     }
   }
 </style>
